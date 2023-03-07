@@ -16,9 +16,11 @@ Including another URLconf
 
 from django.urls import re_path, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from login.views import *
 
 urlpatterns = [
-    re_path(r'^auth/', include("auth.urls"))
+    re_path(r'^login/', login),
+    re_path(r'^home/', home)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

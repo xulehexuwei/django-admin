@@ -21,7 +21,7 @@ def login(request):
             }
         except :
             context={
-            'next':'/auth/home/' #如果没有next，制定next为主页面
+            'next':'/home/' #如果没有next，制定next为主页面
             }
         return render(request,'login.html', context=context)
 
@@ -37,9 +37,11 @@ def login(request):
             user = None
 
         if user is not None:
+            response = HttpResponseRedirect(next)
+            response.set_cookie("token", username)
             # login(request, user)
             #redirect to a success page.
-            return HttpResponseRedirect(next)
+            return response
         else:
             return HttpResponse('login failed!')
 
