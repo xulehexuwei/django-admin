@@ -1,3 +1,4 @@
 
 
 PageLogin = "/login"
+PageHome = "/home"

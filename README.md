@@ -16,6 +16,9 @@ python manage.py startapp auth
 
 ```shell
 python manage.py runserver 0:8000
+
+# windows 启动 必须 127.0.0.1
+python manage.py runserver 127.0.0.1:8000
 ```
 
 # templates 位置修改
