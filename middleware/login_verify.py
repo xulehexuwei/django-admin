@@ -7,6 +7,7 @@ from login.service import AccountPermission
 class LoginVerify(MiddlewareMixin):
     def process_request(self, request):
         token = request.COOKIES.get(common.Cookie_Token)
+        print(token)
         request.jwt_token = token
 
         # path是登录页的时候直接返回该页面，如果是 HttpResponseRedirect(common.PageLogin) 是形成死循环
