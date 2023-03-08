@@ -8,7 +8,7 @@ class LoginVerify(MiddlewareMixin):
     def process_request(self, request):
         request.jwt_token = None
         token = request.COOKIES.get(common.Cookie_Token)
-        # path是登录页的时候直接返回该页面，如果是 HttpResponseRedirect(common.PageLogin) 是形成死循环
+        # path是登录页的时候直接返回该页面
         path = request.path
         print("path request: ", path)
         print("token request: ", token)
@@ -16,8 +16,7 @@ class LoginVerify(MiddlewareMixin):
 
         # 没token 登录肯定过期了
         if not token:
-            # return HttpResponseRedirect(common.PageLogin)
-            return redirect(common.PageLogin)
+            return redirect(common.PageLogin + f"?next={path}")
 
         ap = AccountPermission()
         token_efficient = ap.tokenVerify(token)
@@ -25,7 +24,7 @@ class LoginVerify(MiddlewareMixin):
             request.jwt_token = ap.token
             return None
         else:
-            return redirect(common.PageLogin)
+            return redirect(common.PageLogin + f"?next={path}")
 
     def process_response(self, request, response):
         # 刷新token过期时间
