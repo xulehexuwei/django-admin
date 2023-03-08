@@ -14,8 +14,12 @@ def login(request):
     # GET页面请求
     if request.method == 'GET':
         token = request.COOKIES.get(common.Cookie_Token)
-        if AccountPermission().tokenVerify(token):
-            return redirect(common.PageHome)
+        ap = AccountPermission()
+        token_efficient = ap.tokenVerify(token)
+        if token_efficient:
+            response = redirect(common.PageHome)
+            response.set_cookie(common.Cookie_Token, ap.token, expires=common.TokenExpired)
+            return response
         else:
             return render(request, 'login.html')
 
@@ -33,6 +37,6 @@ def login(request):
 
 def home(request):
     token = request.COOKIES.get(common.Cookie_Token)
-    print("token", token)
+    print("token home: ", token)
     response = render(request, 'home.html')
     return response

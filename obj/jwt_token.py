@@ -33,13 +33,14 @@ class JwtToken(object):
 
 
 if __name__ == '__main__':
-    TEST_DATA = dict(name="mooor")
-    token = JwtToken.generate_token(TEST_DATA, 10)
-    print(token)
-    payload = JwtToken.parse_token(token)
-    print(payload)
-
-    import time
-    time.sleep(11)
+    # TEST_DATA = dict(name="mooor")
+    # token = JwtToken.generate_token(TEST_DATA, 10)
+    # print(token)
+    # payload = JwtToken.parse_token(token)
+    # print(payload)
+    #
+    # import time
+    # time.sleep(11)
+    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6Imp3dCJ9.eyJuYW1lIjoieHV3ZWkiLCJleHAiOjE2NzgyODM2NzJ9.Dt97hD8khmGEWFaByhd_iCqauba6L2P_2CQ7tC8dqcA'
     payload = JwtToken.parse_token(token)
     print(payload)
