@@ -36,7 +36,5 @@ def login(request):
 
 
 def home(request):
-    token = request.COOKIES.get(common.Cookie_Token)
-    print("token home: ", token)
     response = render(request, 'home.html')
     return response
