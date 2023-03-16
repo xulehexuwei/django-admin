@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import re_path, include
+from django.urls import re_path, include, path
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from login.views import *
 import common
 
 urlpatterns = [
+    path("", home, ), # 根路由，http://localhost:8000
     re_path(r'^login/', login),
-    re_path(r'^home/', home),
     re_path(r'^news/', news),
 
 ]

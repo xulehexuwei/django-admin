@@ -1,5 +1,4 @@
-
-
 PageLogin = "/login"
-PageHome = "/home"
+
+PageHome = "/"
 PageNews = "/news"
