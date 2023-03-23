@@ -55,3 +55,7 @@ def home(request):
 def news(request):
     response = render(request, 'news.html')
     return response
+
+def neo4j(request):
+    response = render(request, 'neo4jd3.html')
+    return response

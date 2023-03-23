@@ -20,9 +20,10 @@ from login.views import *
 import common
 
 urlpatterns = [
-    path("", home, ), # 根路由，http://localhost:8000
+    path("", home, ),  # 根路由，http://localhost:8000
     re_path(r'^login/', login),
     re_path(r'^news/', news),
+    re_path(r'^neo4j/', neo4j),
 
 ]
 
