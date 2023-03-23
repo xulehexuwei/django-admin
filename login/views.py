@@ -56,6 +56,25 @@ def news(request):
     response = render(request, 'news.html')
     return response
 
+def tables(request):
+    response = render(request, 'tables.html')
+    return response
+
 def neo4j(request):
     response = render(request, 'neo4jd3.html')
+    return response
+
+
+def choujiang(request):
+    response = render(request, 'choujiang.html')
+    return response
+
+
+def logout(request):
+    # 前端页面清空cookie中的jwt，页面重定向到login页面
+    context = {
+        'next': common.PageLogin,  # 如果没有next，制定next为主页面
+    }
+    response = redirect(context["next"])
+    response.delete_cookie(common.Cookie_Token, "/")
     return response

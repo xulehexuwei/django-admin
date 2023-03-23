@@ -8,8 +8,14 @@
 
     <link href="{% static 'bootstrap-5.1.3/css/bootstrap.min.css' %}" rel="stylesheet">
     <script src="{% static 'bootstrap-5.1.3/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'bootstrap-5.1.3/js/bootstrap.min.js' %}"></script>
 
     <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+    {#    导入顺序很重要，bootstrap-table.min.js在bootstrap-table-zh-CN.min.js之前  #}
+    <link href="{% static 'bootstrap-table/1.22.2/bootstrap-table.min.css' %}" rel="stylesheet"/>
+    <script src="{% static 'bootstrap-table/1.22.2/bootstrap-table.min.js' %}"></script>
+    <script src="{% static 'bootstrap-table/1.22.2/bootstrap-table-zh-CN.min.js' %}"></script>
 
     <style>
         body {
@@ -55,74 +61,6 @@
             border-radius: 0
         }
 
-        .btn-toggle {
-            display: inline-flex;
-            align-items: center;
-            padding: .25rem .5rem;
-            font-weight: 600;
-            color: rgba(0, 0, 0, .65);
-            background-color: transparent;
-            border: 0
-        }
-
-        .btn-toggle:hover, .btn-toggle:focus {
-            color: rgba(0, 0, 0, .85);
-            background-color: #d2f4ea
-        }
-
-        .btn-toggle::before {
-            width: 1.25em;
-            line-height: 0;
-            content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
-            transition: transform .35s ease;
-            transform-origin: .5em 50%
-        }
-
-        .btn-toggle[aria-expanded="true"] {
-            color: rgba(0, 0, 0, .85)
-        }
-
-        .btn-toggle[aria-expanded="true"]::before {
-            transform: rotate(90deg)
-        }
-
-        .btn-toggle-nav a {
-            display: inline-flex;
-            padding: .1875rem .5rem;
-            margin-top: .125rem;
-            margin-left: 1.25rem;
-            text-decoration: none
-        }
-
-        .btn-toggle-nav a:hover, .btn-toggle-nav a:focus {
-            background-color: #d2f4ea
-        }
-
-        .scrollarea {
-            overflow-y: auto
-        }
-
-        .fw-semibold {
-            font-weight: 600
-        }
-
-        .lh-tight {
-            line-height: 1.25
-        }
-
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem
-            }
-        }
     </style>
 </head>
 <body>
@@ -203,16 +141,16 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="/" class="nav-link active" aria-current="page">
+            <li>
+                <a href="/" class="nav-link text-white">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#home"/>
                     </svg>
                     Home
                 </a>
             </li>
-            <li>
-                <a href="/news" class="nav-link text-white">
+            <li class="nav-item">
+                <a href="/news" class="nav-link active" aria-current="page">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#collection"/>
                     </svg>
@@ -228,11 +166,11 @@
                 </a>
             </li>
             <li>
-                <a href="/choujiang" class="nav-link text-white">
+                <a href="#" class="nav-link text-white">
                     <svg class="bi me-2" width="16" height="16">
-                        <use xlink:href="#collection"/>
+                        <use xlink:href="#grid"/>
                     </svg>
-                    抽奖
+                    Products
                 </a>
             </li>
             <li>
@@ -265,48 +203,137 @@
 
     <div class="b-example-divider"></div>
 
-    <div>
 
-        <table class="table table-striped">
-            <caption>条纹表格布局</caption>
-            <thead>
-            <tr>
-                <th>名称</th>
-                <th>城市</th>
-                <th>邮编</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Tanmay</td>
-                <td>Bangalore</td>
-                <td>560001</td>
-            </tr>
-            <tr>
-                <td>Sachin</td>
-                <td>Mumbai</td>
-                <td>400003</td>
-            </tr>
-            <tr>
-                <td>Uma</td>
-                <td>Pune</td>
-                <td>411027</td>
-            </tr>
-            </tbody>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">条件查询</h3>
+            </div>
+            <div class="panel-body">
+                <div style="display:inline-block;">
+
+                    <div style="float:left;padding:6px;">
+                        <span>过程：</span>
+                    </div>
+                    <div style="float:left;">
+                        <select id="process" class="form-control" style="width:200px;">
+                            <option value="">请选择</option>
+                            <option value="1">过程一</option>
+                            <option value="2">过程二</option>
+                            <option value="3">过程三</option>
+                            <option value="4">过程四</option>
+                            <option value="5">过程五</option>
+                        </select>
+                    </div>
+
+                    <div style="float:left;padding:6px;">
+                        <span>编号：</span>
+                    </div>
+                    <div style="float:left;">
+                        <input id="number" class="form-control" style="width:200px;" placeholder="请输入编号"/>
+                    </div>
+
+                    <div style="float:left;margin-left:20px;">
+                        <button id="query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#        <table id="table"></table>#}
+        <table id="table" class="table table-bordered" data-show-refresh="true"
+               data-show-columns="true">
         </table>
+
     </div>
 
+
+    <script>
+        $(document).ready(function () {
+            $('#table').bootstrapTable({
+                url: "https://dev.itic-sci.com/gateway/qa/list",                    // URL
+                method: "get",                                        // 请求类型
+                contentType: "application/x-www-form-urlencoded",      // post请求必须要有，否则后台接受不到参数
+                sidePagination: "server",                              // 设置在服务端还是客户端分页
+                showRefresh: false,                                    // 是否刷新按钮
+                sortStable: true,                                      // 是否支持排序
+                cache: false,                                          // 是否使用缓存
+                pagination: true,                                      // 是否显示分页
+                search: false,                                         // 是否有搜索框
+                clickToSelect: true,                                   // 是否点击选中行
+                pageNumber: 1,                                         // 首页页码，默认为1
+                pageSize: 5,                                           // 页面数据条数
+                pageList: [5, 10, 20, 30],
+                queryParamsType: "",
+                queryParams: function (params) {
+                    return {
+                        size: params.pageSize,                     // 每页记录条数
+                        pn: params.pageNumber,                 // 当前页索引
+                        process: $('#process').val(),                        // 过程
+                        number: $('#number').val()                     // 编号
+                    };
+                },
+                responseHandler: function (res) {
+                    // 对返回参数进行处理
+                    console.log(res);
+                    return {
+                        "total": res.total,
+                        "rows": res.data
+                    };
+                },
+                columns: [
+                    {
+                        field: "select",
+                        title: "全选",
+                        align: "center",
+                        halign: "center",
+                        checkbox: true,
+                    },
+                    {
+                        field: 'id',
+                        title: 'id',
+                        align: "center",
+                        halign: "center"
+                    },
+                    {
+                        field: 'label',
+                        title: '标签',
+                        align: "center",
+                        halign: "center",
+                        sortable: true
+                    },
+                    {
+                        field: 'title',
+                        title: '问题',
+                        align: "center",
+                        halign: "center"
+                    },
+                    {
+                        field: 'answer',
+                        title: '答案',
+                        align: "center",
+                        halign: "center"
+                    },
+                ]
+            })
+
+            // 查询按钮
+            $('#query').click(function () {
+                $('#table').bootstrapTable('refresh', {pageNumber: 1});
+            });
+        });
+    </script>
 
 </main>
 
 <script>
-    $('#submit_single_select').click(function () {
-        var options = $('#selectLeo option:selected')
-        $('#singleValue').html('当前选中的value: ' + options.val())
-        $('#singleText').html('当前选中的text: ' + options.text())
-        console.log(options.val())
-        console.log(options.text())
-    })
+    /* global bootstrap: false */
+    (function () {
+        'use strict'
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+            new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })()
 </script>
 </body>
 </html>

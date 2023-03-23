@@ -22,8 +22,10 @@ import common
 urlpatterns = [
     path("", home, ),  # 根路由，http://localhost:8000
     re_path(r'^login/', login),
-    re_path(r'^news/', news),
+    re_path(r'^news/', tables),
     re_path(r'^neo4j/', neo4j),
+    re_path(r'^choujiang/', choujiang),
+    re_path(r'^logout/', logout),
 
 ]
 

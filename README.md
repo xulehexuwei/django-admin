@@ -21,6 +21,11 @@ python manage.py runserver 0:8000
 python manage.py runserver 127.0.0.1:8000
 ```
 
+- 账号密码
+```shell
+xuwei/xuwei
+```
+
 # templates 位置修改
 
 从模板中我们知道变量使用了双括号。
